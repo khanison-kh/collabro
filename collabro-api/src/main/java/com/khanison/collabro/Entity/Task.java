@@ -53,8 +53,8 @@ public class Task {
     private Project project;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assigned_to")
-    private User assignedTo;
+    @JoinColumn(name = "assigned_user")
+    private User assignedUser;
 
     @PrePersist
     private void onCreate() {
@@ -63,7 +63,7 @@ public class Task {
     }
 
     @PreUpdate
-    private void onUpdtade() {
+    private void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
 
