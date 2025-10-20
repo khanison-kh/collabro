@@ -51,7 +51,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ProjectUser> projectUsers = new HashSet<>();
 
-    @OneToMany(mappedBy = "assignedTo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "assignedUser", cascade = { CascadeType.PERSIST,
+            CascadeType.MERGE }, orphanRemoval = false, fetch = FetchType.LAZY)
     private List<Task> assignedTasks = new ArrayList<>();
 
     @PrePersist
@@ -61,17 +62,17 @@ public class User {
     }
 
     @PreUpdate
-    private void onUpdtade() {
+    private void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
 
     public void addAssignedTask(Task task) {
         assignedTasks.add(task);
-        task.setAssignedTo(this);
+        task.setAssignedUser(this);
     }
 
     public void removeAssignedTask(Task task) {
         assignedTasks.remove(task);
-        task.setAssignedTo(null);
+        task.setAssignedUser(null);
     }
 }

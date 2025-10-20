@@ -5,11 +5,13 @@ import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  * Defines the composite key consisting of project and user IDs used to uniquely
  * identify a ProjectUser.
  */
+@NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
 public class ProjectUserId implements Serializable {
